@@ -63,7 +63,7 @@ export default function Home() {
         <div className={styles.about_container}>
             <div className={styles.hero}>
                 <h2>Hi hooman, I'm JC! I help companies to have a successful Team and provide solutions.</h2>
-                <h1 className="mt-sm">I'm a <span id="typed" ref={ref}></span><span className={styles.cursor}>&nbsp;</span></h1>
+                <h1 className="mt-sm">I am a <span id="typed" ref={ref}></span><span className={styles.cursor}></span></h1>
             </div>
             
             <a className={[styles.bouncing, "mt-sm"].join(" ")} href="#experiences" id="seeMore"><i className="fa-solid fa-chevron-down"></i></a>
