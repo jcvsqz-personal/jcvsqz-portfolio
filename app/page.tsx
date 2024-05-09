@@ -1,42 +1,73 @@
+"use client"; // This is a client component
 import Image from "next/image";
 import styles from "./page.module.css";
+import { useEffect, useRef } from "react";
+import React from "react";
+import '../node_modules/font-awesome/css/font-awesome.min.css'; 
+
+let typedSpan: any;
+const totype = ["Team Lead", "Frontend Developer", "Backend Developer", "Explorer :)"]
+
+const delayTyping_char = 150;
+const delayErasing_text = 50;
+const delayTyping_text = 1000;
+
+let totypeIndex = 0;
+let charIndex = 0;
+
+function typeText() {
+	if (charIndex < totype[totypeIndex].length) {
+		typedSpan.textContent += totype[totypeIndex].charAt(charIndex);
+		charIndex++;
+		setTimeout(typeText, delayTyping_char);
+	}
+	else {
+		setTimeout(eraseText, delayTyping_text);
+	}
+}
+
+function eraseText() {
+	if (charIndex > 0) {
+		typedSpan.textContent = totype[totypeIndex].substring(0, charIndex-1);
+		charIndex = charIndex-1;
+		setTimeout(eraseText, delayErasing_text);
+	}
+	else {
+		totypeIndex++;
+
+		if (totypeIndex >= totype.length)
+			totypeIndex = 0;
+			setTimeout(typeText, delayTyping_text);
+	}
+}
+
 
 export default function Home() {
+  const ref = React.useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    let el = document.getElementById("typed");
+    typedSpan = el;
+
+    if (totype[totypeIndex].length) setTimeout(typeText, delayTyping_text);
+  }, [])
+
+  
+
   return (
     <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+
 
       <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+
+        <div className={styles.about_container}>
+            <div className={styles.hero}>
+                <h2>Hi hooman, I'm JC! I help companies to have a successful Team and provide solutions.</h2>
+                <h1 className="mt-sm">I'm a <span id="typed" ref={ref}></span><span className={styles.cursor}>&nbsp;</span></h1>
+            </div>
+            
+            <a className={[styles.bouncing, "mt-sm"].join(" ")} href="#experiences" id="seeMore"><i className="fa-solid fa-chevron-down"></i></a>
+        </div>
       </div>
 
       <div className={styles.grid}>
@@ -71,7 +102,7 @@ export default function Home() {
           rel="noopener noreferrer"
         >
           <h2>
-            Templates <span>-&gt;</span>
+            Templates <span></span>
           </h2>
           <p>Explore starter templates for Next.js.</p>
         </a>
