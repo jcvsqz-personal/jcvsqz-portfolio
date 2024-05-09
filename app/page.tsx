@@ -62,7 +62,7 @@ export default function Home() {
 
         <div className={styles.about_container}>
             <div className={styles.hero}>
-                <h2>Hi hooman, I'm JC! I help companies to have a successful Team and provide solutions.</h2>
+                <h2>Hi hooman, I&apos;m JC! I help companies to have a successful Team and provide solutions.</h2>
                 <h1 className="mt-sm">I am a <span id="typed" ref={ref}></span><span className={styles.cursor}></span></h1>
             </div>
             
